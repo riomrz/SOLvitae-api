@@ -1,22 +1,28 @@
-const createMintAccount = async () => {
-    const {
-        Connection,
-        Keypair,
-        SystemProgram,
-        Transaction,
-        clusterApiUrl,
-        sendAndConfirmTransaction,
-      } = require("@solana/web3.js");
-      const {
-        MINT_SIZE,
-        TOKEN_2022_PROGRAM_ID,
-        createInitializeMint2Instruction,
-        getMinimumBalanceForRentExemptMint
-      } = require("@solana/spl-token");
+import {
+    Connection,
+    Keypair,
+    SystemProgram,
+    Transaction,
+    clusterApiUrl,
+    sendAndConfirmTransaction,
+  } from "@solana/web3.js";
+  import {
+    MINT_SIZE,
+    TOKEN_2022_PROGRAM_ID,
+    createInitializeMint2Instruction,
+    getMinimumBalanceForRentExemptMint,
+    createMint,
+    createAssociatedTokenAccountInstruction,
+    getAssociatedTokenAddressSync,
+    createAccount,
+    createMintToInstruction,
+    getOrCreateAssociatedTokenAccount,
+    mintTo,
+    createTransferInstruction,
+  } from "@solana/spl-token";
 
-      // TODO: use initializeMetadataPointerData to enable metadata extensione on the Token
-      
-      const wallet = pg.wallet;
+const createMintAccount = async () => {
+      const wallet = Keypair.generate();
       const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
       
       // Generate keypair to use as address of mint account
@@ -67,24 +73,9 @@ const createMintAccount = async () => {
         "\nMint Account:",
         `https://explorer.solana.com/address/${mint.publicKey}?cluster=devnet`
       );
-      
 }
 
-const createTokenAccount = async () => {
-    const {
-        Connection,
-        Transaction,
-        clusterApiUrl,
-        sendAndConfirmTransaction,
-        Keypair,
-      } = require("@solana/web3.js");
-      const {
-        createMint,
-        createAssociatedTokenAccountInstruction,
-        getAssociatedTokenAddressSync,
-        TOKEN_2022_PROGRAM_ID,
-      } = require("@solana/spl-token");
-      
+const createTokenAccount = async () => {     
       const wallet = pg.wallet;
       const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
       
@@ -140,21 +131,7 @@ const createTokenAccount = async () => {
       );      
 }
 
-const mintToken = async () => {
-    const {
-        Connection,
-        Transaction,
-        clusterApiUrl,
-        sendAndConfirmTransaction,
-        Keypair,
-      } = require("@solana/web3.js");
-      const {
-        createMint,
-        createAccount,
-        TOKEN_2022_PROGRAM_ID,
-        createMintToInstruction,
-      } = require("@solana/spl-token");
-      
+const mintToken = async () => {      
       const wallet = pg.wallet;
       const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
       
@@ -170,7 +147,7 @@ const mintToken = async () => {
         TOKEN_2022_PROGRAM_ID
       );
       
-      // Create new Token Account, defaults to ATA
+      // Create new Token Account, defaults to ATA (Associated Token Account)
       const tokenAccount = await createAccount(
         connection,
         wallet.keypair, // payer
@@ -213,21 +190,6 @@ const mintToken = async () => {
 }
 
 const transferTokens = async () => {
-    const {
-        Connection,
-        Transaction,
-        clusterApiUrl,
-        sendAndConfirmTransaction,
-        Keypair,
-      } = require("@solana/web3.js");
-      const {
-        createMint,
-        TOKEN_2022_PROGRAM_ID,
-        getOrCreateAssociatedTokenAccount,
-        mintTo,
-        createTransferInstruction,
-      } = require("@solana/spl-token");
-      
       const wallet = pg.wallet;
       const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
       
