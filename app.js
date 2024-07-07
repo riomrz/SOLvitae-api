@@ -16,7 +16,8 @@ const appRoutes = require('./routes/routes');
 app.use('/', appRoutes);
 
 // Specify the port and start the server
-const port = process.env.PORT || 8080; // You can use environment variables for port configuration
+const port = process.env.PORT || 8080;
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

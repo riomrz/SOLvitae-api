@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { createMintAccount } = require('../utils/tokenUtils.js');
 
 // create NFT representing the user CV
 router.get('/user/createcv', (req, res) => {
     console.log("creating CV")
     // create a new wallet, obtain lamports, create NFT collection and mint NFT of the CV
+
+    // TODO: call token utils
 
     return res.send('CV created')
 });
