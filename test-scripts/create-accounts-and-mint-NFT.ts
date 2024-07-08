@@ -1,4 +1,7 @@
 import {
+  createAccount,
+  createMint,
+  createMintToInstruction,
   TOKEN_2022_PROGRAM_ID
 } from "@solana/spl-token";
 import {
@@ -24,23 +27,23 @@ console.log(`Airdrop transaction: https://explorer.solana.com/tx/${airdropSignat
 // Create new Mint Account
 const mint = await createMint(
   connection,
-  wallet.keypair, // payer
+  wallet, // payer
   wallet.publicKey, // mint authority
   wallet.publicKey, // freeze authority
   2, // decimals
   new Keypair(), // keypair for mint account
-  null,
+  undefined,
   TOKEN_2022_PROGRAM_ID
 );
 
 // Create new Token Account, defaults to ATA (Associated Token Account)
 const tokenAccount = await createAccount(
   connection,
-  wallet.keypair, // payer
+  wallet, // payer
   mint, // mint address
   wallet.publicKey, // token account owner
-  null,
-  null,
+  undefined,
+  undefined,
   TOKEN_2022_PROGRAM_ID
 );
 
@@ -60,7 +63,7 @@ const transactionSignature = await sendAndConfirmTransaction(
   connection,
   transaction,
   [
-    wallet.keypair, // payer, mint authority
+    wallet, // payer, mint authority
   ]
 );
 
