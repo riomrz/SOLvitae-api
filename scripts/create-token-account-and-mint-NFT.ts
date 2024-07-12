@@ -40,17 +40,6 @@ import walletSecretKey from "../wallets/payer-secret-key.json";
         TOKEN_2022_PROGRAM_ID
     );
     
-    // FIXME: doesn't work
-    // Freeze the mint authority so no more tokens can be minted to make it an NFT
-    // const initializeSetAuthorityInstruction = createSetAuthorityInstruction(
-    //     tokenAccount.address, // Address of the token account
-    //     payer.publicKey, // Current authority of the specified type
-    //     AuthorityType.MintTokens, // Type of authority to set
-    //     null, // New authority of the account
-    //     [],
-    //     TOKEN_2022_PROGRAM_ID
-    // );
-    
     // Create and send transaction
     const transaction = new Transaction().add(
         initializeMintToInstruction,
@@ -71,18 +60,4 @@ import walletSecretKey from "../wallets/payer-secret-key.json";
         "\nToken Account: ",
         `https://solana.fm/address/${tokenAccount.address}?cluster=devnet`
     );
-
-    // FIXME: doesn't work
-    // const setAuthorityInstructionResult = await setAuthority(
-    //     connection,
-    //     payer,
-    //     tokenAccount.address,
-    //     mintAuthority,
-    //     AuthorityType.MintTokens,
-    //     null,
-    //     [],
-    //     null,
-    //     TOKEN_2022_PROGRAM_ID
-    // )
-    // console.log("setAuthorityInstructionResult: ", setAuthorityInstructionResult)
 })()
