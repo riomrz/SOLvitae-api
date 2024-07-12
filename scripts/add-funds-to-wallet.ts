@@ -3,9 +3,9 @@ import {
     Keypair,
     LAMPORTS_PER_SOL
 } from "@solana/web3.js";
-import walletSecretKey from "../wallets/wallet.json";
+import payerWalletSecretKey from "../wallets/payer-secret-key.json";
 
-const wallet = Keypair.fromSecretKey(new Uint8Array(walletSecretKey)); // FIXME: is wallet.publicKey different deriving it from the secretKey?
+const wallet = Keypair.fromSecretKey(new Uint8Array(payerWalletSecretKey)); // FIXME: is wallet.publicKey different deriving it from the secretKey?
 const connection = new Connection("https://api.devnet.solana.com", "finalized");
 
 (async () => {
