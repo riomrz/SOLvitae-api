@@ -1,4 +1,19 @@
 import {
+    ExtensionType,
+    LENGTH_SIZE,
+    TOKEN_2022_PROGRAM_ID,
+    TYPE_SIZE,
+    createInitializeMetadataPointerInstruction,
+    createInitializeMintInstruction,
+    getMintLen
+} from "@solana/spl-token";
+import {
+    TokenMetadata,
+    createInitializeInstruction,
+    createUpdateFieldInstruction,
+    pack
+} from "@solana/spl-token-metadata";
+import {
     Connection,
     Keypair,
     SystemProgram,
@@ -6,28 +21,8 @@ import {
     clusterApiUrl,
     sendAndConfirmTransaction
 } from "@solana/web3.js";
-import {
-    ExtensionType,
-    TOKEN_2022_PROGRAM_ID,
-    createInitializeMintInstruction,
-    getMintLen,
-    createInitializeMetadataPointerInstruction,
-    getMint,
-    getMetadataPointerState,
-    getTokenMetadata,
-    TYPE_SIZE,
-    LENGTH_SIZE,
-    createMintToInstruction
-} from "@solana/spl-token";
-import {
-    createInitializeInstruction,
-    createUpdateFieldInstruction,
-    createRemoveKeyInstruction,
-    pack,
-    TokenMetadata,
-} from "@solana/spl-token-metadata";
-import payerWalletSecretKey from "../wallets/payer-secret-key.json";
 import fs from "fs";
+import payerWalletSecretKey from "../wallets/payer-secret-key.json";
 
 
 (async () => {
