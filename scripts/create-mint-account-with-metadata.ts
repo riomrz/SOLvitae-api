@@ -41,6 +41,7 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
     
     // Generate new keypair for Mint Account
     const mintKeypair = Keypair.generate();
+    fs.writeFileSync("wallets/mint-secret-key.json", JSON.stringify([...mintKeypair.secretKey]));
     // Address for Mint Account
     const mint = mintKeypair.publicKey;
     // Decimals for Mint Account
@@ -49,11 +50,7 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
     const mintAuthority = payer.publicKey;
     // Authority that can update the metadata pointer and token metadata
     const updateAuthority = payer.publicKey;
-    
-    fs.writeFileSync("wallets/mint-keypair.json", JSON.stringify(mintKeypair));
-    fs.writeFileSync("wallets/mint-secretkey.json", JSON.stringify([...mintKeypair.secretKey]));
-    fs.writeFileSync("wallets/mint-publickey.json", JSON.stringify(mintKeypair.publicKey));
-    
+        
     // Metadata to store in Mint Account
     const metaData: TokenMetadata = {
         updateAuthority: updateAuthority,
@@ -217,7 +214,6 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
         "\nCreate Mint Account:",
         `https://solana.fm/tx/${transactionSignature}?cluster=devnet-solana`,
     );
-    
-    // last run:
-    // Create Mint Account: https://solana.fm/tx/6A1YqhFqZaVt3raVR2HuazimTerQgfSyVJFjyMqaTzvzLmFqGWcbiA7wbrgdVFRQVBHxQbACxHCm6KqotcKxLY4?cluster=devnet-solana
+    // Last test, SOLVITAE mint account:
+    // Create Mint Account: https://solana.fm/tx/Rk1oZgP74msxTfwLra1ZtMXS6aMYT5mjrgmaXzgX5tuhNdSmqn49zEkE1quv23Ed81G5hqBkjKHb9rTpBbDeXgq?cluster=devnet-solana
 })()
