@@ -6,7 +6,7 @@
   "scripts": {
     "1-create-wallet": "ts-node scripts/create-wallet.ts",
     "2-add-funds-to-wallet": "ts-node scripts/add-funds-to-wallet.ts",
-    "3-create-accounts-and-mint-NFT-with-metadata": "ts-node scripts/create-accounts-and-token-with-metadata.ts",
+    "3-create-mint-account-with-metadata": "ts-node scripts/create-mint-account-with-metadata.ts",
     "4-create-token-account-and-mint-NFT": "ts-node scripts/create-token-account-and-mint-NFT"
   },
   "author": "MI",

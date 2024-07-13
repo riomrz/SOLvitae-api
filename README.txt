@@ -1,0 +1,2 @@
+NEXT improvements:
+- disable future minting: the TOKEN-20222 Program doesn't let me disable future minting changing the AuthorityType.MintTokens to null as made in the Token Program (the token program without extensions such as the metadata extension). Ref: https://spl.solana.com/token#example-create-a-non-fungible-token 

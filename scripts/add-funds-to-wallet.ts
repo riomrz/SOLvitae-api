@@ -12,7 +12,7 @@ const connection = new Connection("https://api.devnet.solana.com", "finalized");
     try {
         const airdropSignature = await connection.requestAirdrop(
             wallet.publicKey,
-            1 * LAMPORTS_PER_SOL
+            2 * LAMPORTS_PER_SOL
         );
         console.log(`Airdrop transaction: https://explorer.solana.com/tx/${airdropSignature}?cluster=devnet`);
     } catch (error) {

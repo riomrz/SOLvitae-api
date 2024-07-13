@@ -49,7 +49,7 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
     const mintAuthority = payer.publicKey;
     // Authority that can update the metadata pointer and token metadata
     const updateAuthority = payer.publicKey;
-
+    
     fs.writeFileSync("wallets/mint-keypair.json", JSON.stringify(mintKeypair));
     fs.writeFileSync("wallets/mint-secretkey.json", JSON.stringify([...mintKeypair.secretKey]));
     fs.writeFileSync("wallets/mint-publickey.json", JSON.stringify(mintKeypair.publicKey));
@@ -58,10 +58,19 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
     const metaData: TokenMetadata = {
         updateAuthority: updateAuthority,
         mint: mint,
-        name: "OPOS",
-        symbol: "OPOS",
-        uri: "https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/DeveloperPortal/metadata.json",
-        additionalMetadata: [["description", "Only Possible On Solana"]],
+        name: "SOLVITAE",
+        symbol: "SOLVITAE",
+        uri: "https://github.com/riomrz/SOLvitae-api/assets/metadata.json",
+        additionalMetadata: [
+            ["description", "dNFT representing the person's CV"], 
+            ["company name", "company name"], 
+            ["contract type", "full-time"],
+            ["role started", "date-start"],
+            ["role ended", "date-end"],
+            ["work model", "remote"],
+            ["job position", "software developer"],   
+            ["job position description", "full-stack developer"],   
+        ],
     };
     
     // Size of MetadataExtension 2 bytes for type, 2 bytes for length
@@ -119,13 +128,62 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
         uri: metaData.uri,
     });
     
-    // Instruction to update metadata, adding custom field
-    const updateFieldInstruction = createUpdateFieldInstruction({
+    // Instruction to update metadata, adding custom fields
+    const updateDescriptionInstruction = createUpdateFieldInstruction({
         programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
         metadata: mint, // Account address that holds the metadata
         updateAuthority: updateAuthority, // Authority that can update the metadata
         field: metaData.additionalMetadata[0][0], // key
         value: metaData.additionalMetadata[0][1], // value
+    });
+    const updateCompanyNameInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[1][0], // key
+        value: metaData.additionalMetadata[1][1], // value
+    });
+    const updateContractTypeInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[2][0], // key
+        value: metaData.additionalMetadata[2][1], // value
+    });
+    const updateRoleStartedInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[3][0], // key
+        value: metaData.additionalMetadata[3][1], // value
+    });
+    const updateRoleEndedInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[4][0], // key
+        value: metaData.additionalMetadata[4][1], // value
+    });
+    const updateWorkModelInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[5][0], // key
+        value: metaData.additionalMetadata[5][1], // value
+    });
+    const updateJobPositionInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[6][0], // key
+        value: metaData.additionalMetadata[6][1], // value
+    });
+    const updateJobPositionDescriptionInstruction = createUpdateFieldInstruction({
+        programId: TOKEN_2022_PROGRAM_ID, // Token Extension Program as Metadata Program
+        metadata: mint, // Account address that holds the metadata
+        updateAuthority: updateAuthority, // Authority that can update the metadata
+        field: metaData.additionalMetadata[7][0], // key
+        value: metaData.additionalMetadata[7][1], // value
     });
     
     
@@ -138,9 +196,16 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
         // note: the above instructions are required before initializing the mint
         initializeMintInstruction,
         initializeMetadataInstruction,
-        updateFieldInstruction,
+        updateDescriptionInstruction,
+        updateCompanyNameInstruction,
+        updateContractTypeInstruction,
+        updateRoleStartedInstruction,
+        updateRoleEndedInstruction,
+        updateWorkModelInstruction,
+        updateJobPositionInstruction,
+        updateJobPositionDescriptionInstruction
     );
-        
+    
     // Send transaction
     transactionSignature = await sendAndConfirmTransaction(
         connection,
@@ -152,7 +217,7 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
         "\nCreate Mint Account:",
         `https://solana.fm/tx/${transactionSignature}?cluster=devnet-solana`,
     );
-
+    
     // last run:
     // Create Mint Account: https://solana.fm/tx/6A1YqhFqZaVt3raVR2HuazimTerQgfSyVJFjyMqaTzvzLmFqGWcbiA7wbrgdVFRQVBHxQbACxHCm6KqotcKxLY4?cluster=devnet-solana
 })()

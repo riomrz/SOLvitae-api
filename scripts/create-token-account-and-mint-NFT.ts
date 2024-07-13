@@ -1,5 +1,5 @@
-import { AuthorityType, createMintToInstruction, createSetAuthorityInstruction, getOrCreateAssociatedTokenAccount, setAuthority, TOKEN_2022_PROGRAM_ID } from "@solana/spl-token";
-import { clusterApiUrl, Connection, Keypair, PublicKey, sendAndConfirmTransaction, Transaction } from "@solana/web3.js";
+import { createMintToInstruction, getOrCreateAssociatedTokenAccount, TOKEN_2022_PROGRAM_ID } from "@solana/spl-token";
+import { clusterApiUrl, Connection, Keypair, sendAndConfirmTransaction, Transaction } from "@solana/web3.js";
 import mintSecretKey from "../wallets/mint-secret-key.json";
 import walletSecretKey from "../wallets/payer-secret-key.json";
 
