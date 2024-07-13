@@ -60,7 +60,7 @@ import payerWalletSecretKey from "../wallets/payer-secret-key.json";
         mint: mint,
         name: "SOLVITAE",
         symbol: "SOLVITAE",
-        uri: "https://github.com/riomrz/SOLvitae-api/assets/metadata.json",
+        uri: "https://github.com/riomrz/SOLvitae-api/blob/main/assets/metadata.json",
         additionalMetadata: [
             ["description", "dNFT representing the person's CV"], 
             ["company name", "company name"], 
